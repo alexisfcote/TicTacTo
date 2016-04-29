@@ -7,6 +7,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
 
+/**
+ * Main launcher class for the tictacto game
+ * 
+ * @author alfoc
+ *
+ */
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
@@ -16,7 +22,6 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("TicTacToView.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Tic Tac To");
-			//primaryStage.setMaximized(true);
 			primaryStage.show();
 			primaryStage.setMinWidth(primaryStage.getWidth());
 		    primaryStage.setMinHeight(primaryStage.getHeight());
