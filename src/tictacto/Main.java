@@ -12,13 +12,14 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("TicTacToView.fxml"));
-			
-			Scene scene = new Scene(root,root.getMinHeight(),root.getMinWidth());
+			Scene scene = new Scene(root, -1, -1);
 			scene.getStylesheets().add(getClass().getResource("TicTacToView.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Tic Tac To");
 			//primaryStage.setMaximized(true);
 			primaryStage.show();
+			primaryStage.setMinWidth(primaryStage.getWidth());
+		    primaryStage.setMinHeight(primaryStage.getHeight());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

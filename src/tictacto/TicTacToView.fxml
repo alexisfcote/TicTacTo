@@ -7,59 +7,65 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import java.util.ArrayList?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictacto.TicTacToController">
-
-	<left>
-		<VBox>
-			<children>
-				<Button id="btn_reset" mnemonicParsing="false" onAction="#onBtnReset" text="Reset" />
-			</children>
-			<BorderPane.margin>
-				<Insets right="10.0" />
-			</BorderPane.margin>
-		</VBox>
-	</left>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictacto.TicTacToController">
 	<center>
-		<GridPane fx:id="gridpane" minHeight="-Infinity" minWidth="-Infinity">
-			<columnConstraints>
-				<ColumnConstraints />
-				<ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-				<ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-			</columnConstraints>
-			<rowConstraints>
-				<RowConstraints />
-				<RowConstraints />
-				<RowConstraints />
-				<RowConstraints />
-			</rowConstraints>
-			<children>
-				<Rectangle fx:id="rect00" arcHeight="20.0" arcWidth="20.0" fill="#ffffff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect10" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect20" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect01" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect11" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect21" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect02" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect12" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
-				<Rectangle fx:id="rect22" arcHeight="20.0" arcWidth="20.0" fill="#1f93ff00" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
-				<fx:define>
-					<ArrayList fx:id="rectangleList">
-						<fx:reference source="rect00" />
-						<fx:reference source="rect10" />
-						<fx:reference source="rect20" />
-						<fx:reference source="rect01" />
-						<fx:reference source="rect11" />
-						<fx:reference source="rect21" />
-						<fx:reference source="rect02" />
-						<fx:reference source="rect12" />
-						<fx:reference source="rect22" />
-					</ArrayList>
-				</fx:define>
-			</children>
-		</GridPane>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="currentPlayer" fill="#f20000" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur 1">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+      		<GridPane fx:id="gridpane" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity">
+      			<columnConstraints>
+      				<ColumnConstraints />
+      				<ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+      				<ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+      			</columnConstraints>
+      			<rowConstraints>
+      				<RowConstraints />
+      				<RowConstraints />
+      				<RowConstraints />
+      				<RowConstraints />
+      			</rowConstraints>
+      			<children>
+      				<Rectangle fx:id="rect00" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect10" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect20" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect01" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect11" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect21" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect02" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect12" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
+      				<Rectangle fx:id="rect22" arcHeight="20.0" arcWidth="20.0" fill="#ffffffff" height="100.0" onMouseClicked="#onRectangleClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
+      				<fx:define>
+      					<ArrayList fx:id="rectangleList">
+      						<fx:reference source="rect00" />
+      						<fx:reference source="rect10" />
+      						<fx:reference source="rect20" />
+      						<fx:reference source="rect01" />
+      						<fx:reference source="rect11" />
+      						<fx:reference source="rect21" />
+      						<fx:reference source="rect02" />
+      						<fx:reference source="rect12" />
+      						<fx:reference source="rect22" />
+      					</ArrayList>
+      				</fx:define>
+      			</children>
+      		</GridPane>
+      				<Button id="btn_reset" alignment="CENTER" mnemonicParsing="false" onAction="#onBtnReset" text="Reset" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding></Button>
+         </children>
+      </VBox>
 	</center>
 </BorderPane>

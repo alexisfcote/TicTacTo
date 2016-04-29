@@ -6,6 +6,8 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -14,6 +16,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
+import javafx.scene.text.Text;
 
 public class TicTacToController implements Callback<Object, Object> {
 
@@ -21,15 +24,25 @@ public class TicTacToController implements Callback<Object, Object> {
 	private int playing = 1;
 	@FXML
 	private List<Rectangle> rectangleList;
-	
+
 	private List<Node> shapes = new ArrayList<Node>();
-	@FXML GridPane gridpane;
+	@FXML
+	GridPane gridpane;
+	@FXML
+	Text currentPlayer;
 
 	public TicTacToController() {
 		// TODO Auto-generated constructor stub
 
 		// add callbacks
 		tictacto.registerUpdateCallback(this);
+
+	}
+
+	@FXML
+	public void initialize() {
+		playing = 1;
+		drawGrid();
 	}
 
 	public void changeplayer() {
@@ -48,6 +61,13 @@ public class TicTacToController implements Callback<Object, Object> {
 	}
 
 	private void drawGrid() {
+		currentPlayer.setText("Player " + playing + " is playing");
+		if (playing == 1) {
+			currentPlayer.setFill(Color.BLUE);
+		} else {
+			currentPlayer.setFill(Color.RED);
+		}
+
 		for (Node shape : shapes) {
 			gridpane.getChildren().remove(shape);
 		}
@@ -58,13 +78,8 @@ public class TicTacToController implements Callback<Object, Object> {
 				switch (grid[i][j]) {
 				case 1:
 					rectangleList.get(3 * i + j).setStroke(Color.BLUE);
-					Polygon xshape = new Polygon(new double[]{
-							-35.0, -35.0,
-						    35.0, 35.0,
-						    0.0, 0.0,
-						    -35.0, 35.0,
-						    35.0, -35.0,
-						    0.0, 0.0});
+					Polygon xshape = new Polygon(
+							new double[] { -35.0, -35.0, 35.0, 35.0, 0.0, 0.0, -35.0, 35.0, 35.0, -35.0, 0.0, 0.0 });
 					xshape.setFill(null);
 					xshape.setStroke(Color.BLACK);
 					xshape.setStrokeWidth(3);
@@ -96,8 +111,32 @@ public class TicTacToController implements Callback<Object, Object> {
 		int y = GridPane.getColumnIndex(rect);
 		int x = GridPane.getRowIndex(rect);
 		if (tictacto.play(x, y, playing)) {
+			int winnigplayer = tictacto.checkWin();
+			if (winnigplayer > 0) {
+				winscreen(winnigplayer);
+				return;
+			}
 			changeplayer();
+			drawGrid();
 		}
+	}
+
+	private void winscreen(int winnigplayer) {
+		// TODO Auto-generated method stub
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Congratulations");
+		alert.setHeaderText("Player " + winnigplayer + " won");
+		alert.setContentText("Congratulations!");
+
+		alert.showAndWait();
+		resetGame();
+	}
+
+	private void resetGame() {
+		tictacto = new TicTacTo();
+		tictacto.registerUpdateCallback(this);
+		playing = 1;
+		drawGrid();
 	}
 
 	@FXML
@@ -114,8 +153,7 @@ public class TicTacToController implements Callback<Object, Object> {
 
 	@FXML
 	public void onBtnReset(ActionEvent event) {
-		tictacto = new TicTacTo();
-		tictacto.registerUpdateCallback(this);
-		drawGrid();
+		resetGame();
 	}
+
 }
