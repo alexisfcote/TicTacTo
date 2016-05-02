@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
@@ -26,10 +23,11 @@ import javafx.scene.text.Text;
  */
 public class TicTacToController implements Callback<Object, Object> {
 
-  private TicTacTo tictacto = new TicTacTo();
+  TicTacTo tictacto = new TicTacTo();
+  Drawer drawer = new Drawer();
   @FXML
-  private List<Rectangle> rectangleList;
-  private List<Node> shapes = new ArrayList<Node>();
+  List<Rectangle> rectangleList;
+  List<Node> shapes = new ArrayList<Node>();
   @FXML
   GridPane gridpane;
   @FXML
@@ -43,7 +41,7 @@ public class TicTacToController implements Callback<Object, Object> {
 
   @FXML
   public void initialize() {
-    drawGrid();
+    drawer.drawGrid(this);
   }
 
   /*
@@ -54,76 +52,8 @@ public class TicTacToController implements Callback<Object, Object> {
   @Override
   public Object call(Object param) {
     // Gets called when the tictacto model gets updated
-    drawGrid();
+    drawer.drawGrid(this);
     return null;
-  }
-
-  /**
-   * Redraw the gamescreen from scratch
-   */
-  private void drawGrid() {
-    currentPlayer.setText("Player " + tictacto.getPlaying() + " is playing");
-    if (tictacto.getPlaying() == 1) {
-      currentPlayer.setFill(Color.BLUE);
-    } else {
-      currentPlayer.setFill(Color.RED);
-    }
-
-    for (Node shape : shapes) {
-      gridpane.getChildren().remove(shape);
-    }
-    shapes.clear();
-    int[][] grid = tictacto.getgrid();
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid.length; j++) {
-        switch (grid[i][j]) {
-          case 1:
-            drawX(i, j);
-            break;
-          case 2:
-            drawO(i, j);
-            break;
-          default:
-            rectangleList.get(3 * i + j).setStroke(Color.BLACK);
-            break;
-        }
-      }
-    }
-  }
-
-  /**
-   * Draw a rectangle at the designated location on the grid
-   * 
-   * @param i
-   * @param j
-   */
-  private void drawO(int i, int j) {
-    rectangleList.get(3 * i + j).setStroke(Color.RED);
-    Circle circle = new Circle(35);
-    circle.setFill(null);
-    circle.setStroke(Color.BLACK);
-    circle.setStrokeWidth(3);
-    shapes.add(circle);
-    gridpane.add(circle, j, i);
-    GridPane.setHalignment(circle, HPos.CENTER);
-  }
-
-  /**
-   * Draw an X at the designated location on the grid
-   * 
-   * @param i
-   * @param j
-   */
-  private void drawX(int i, int j) {
-    rectangleList.get(3 * i + j).setStroke(Color.BLUE);
-    Polygon xshape = new Polygon(
-        new double[] {-35.0, -35.0, 35.0, 35.0, 0.0, 0.0, -35.0, 35.0, 35.0, -35.0, 0.0, 0.0});
-    xshape.setFill(null);
-    xshape.setStroke(Color.BLACK);
-    xshape.setStrokeWidth(3);
-    shapes.add(xshape);
-    gridpane.add(xshape, j, i);
-    GridPane.setHalignment(xshape, HPos.CENTER);
   }
 
   /**
@@ -142,7 +72,7 @@ public class TicTacToController implements Callback<Object, Object> {
         winscreen(winnigplayer);
         return;
       }
-      drawGrid();
+      drawer.drawGrid(this);
     }
   }
 
@@ -165,7 +95,7 @@ public class TicTacToController implements Callback<Object, Object> {
   private void resetGame() {
     tictacto = new TicTacTo();
     tictacto.registerUpdateCallback(this);
-    drawGrid();
+    drawer.drawGrid(this);
   }
 
   @FXML
