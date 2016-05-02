@@ -2,6 +2,8 @@ package tictacto;
 
 import javafx.geometry.HPos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -78,6 +80,23 @@ public class Drawer {
     ticTacToController.shapes.add(xshape);
     ticTacToController.gridpane.add(xshape, j, i);
     GridPane.setHalignment(xshape, HPos.CENTER);
+  }
+
+  /**
+   * Launch a dialog box informing the winnigplayer that he won Also reset the game.
+   * 
+   * @param ticTacToController TODO
+   * @param winnigplayer
+   */
+  void winscreen(TicTacToController ticTacToController, int winnigplayer) {
+    //
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setTitle("Congratulations");
+    alert.setHeaderText("Player " + winnigplayer + " won");
+    alert.setContentText("Congratulations!");
+  
+    alert.showAndWait();
+    ticTacToController.resetGame();
   }
 
 }

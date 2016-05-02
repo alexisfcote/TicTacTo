@@ -5,8 +5,6 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -69,30 +67,14 @@ public class TicTacToController implements Callback<Object, Object> {
     if (tictacto.play(x, y)) {
       int winnigplayer = tictacto.checkWin();
       if (winnigplayer > 0) {
-        winscreen(winnigplayer);
+        drawer.winscreen(this, winnigplayer);
         return;
       }
       drawer.drawGrid(this);
     }
   }
 
-  /**
-   * Launch a dialog box informing the winnigplayer that he won Also reset the game.
-   * 
-   * @param winnigplayer
-   */
-  private void winscreen(int winnigplayer) {
-    //
-    Alert alert = new Alert(AlertType.INFORMATION);
-    alert.setTitle("Congratulations");
-    alert.setHeaderText("Player " + winnigplayer + " won");
-    alert.setContentText("Congratulations!");
-
-    alert.showAndWait();
-    resetGame();
-  }
-
-  private void resetGame() {
+  void resetGame() {
     tictacto = new TicTacTo();
     tictacto.registerUpdateCallback(this);
     drawer.drawGrid(this);
